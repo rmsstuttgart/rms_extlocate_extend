@@ -6,14 +6,22 @@ namespace Rms\RmsExtlocateExtend\LocateFactProvider;
 
 use Leuchtfeuer\Locate\FactProvider\AbstractFactProvider;
 use Leuchtfeuer\Locate\Utility\LocateUtility;
+use Rms\RmsExtlocateExtend\Domain\Repository\IpCacheRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class RmsFactProvider extends AbstractFactProvider
 {
-    const PROVIDER_NAME = 'rmsfactprovider';
-
     // https://app.ipgeolocation.io/
     const API_KEY = '38433d1b928341c285d3251b5bcb46a6';
+    const PROVIDER_NAME = 'rmsfactprovider';
+    private int $storage_pid = 0;
+
+    public function __construct(
+        protected readonly IpCacheRepository $ipCacheRepository
+    ) {
+    }
 
     /**
      * @inheritDoc
@@ -28,10 +36,18 @@ class RmsFactProvider extends AbstractFactProvider
      */
     public function process(): self
     {
-        foreach (GeneralUtility::getIndpEnv('_ARRAY') as $key => $value) {
-            //\debug($key);
-            //$this->facts[$this->getFactPropertyName($key)] = $value;
-        }
+        /** @var ConfigurationManager $configurationManager */
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+        $typoscript = $configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
+            'sitepackage'
+        );
+        $this->storage_pid = (int)$typoscript['plugin.']['rms_extlocate_extend.']['storagePid'];
+
+        //foreach (GeneralUtility::getIndpEnv('_ARRAY') as $key => $value) {
+        //\debug($key);
+        //$this->facts[$this->getFactPropertyName($key)] = $value;
+        //}
 
         $simulateIp = $this->configuration['settings']['simulateIp'] ?: null;
         if ($simulateIp) {
@@ -43,15 +59,17 @@ class RmsFactProvider extends AbstractFactProvider
         //\debug($ip);
 
         $location = $this->getGeolocation(self::API_KEY, $ip);
-        $decodedLocation = json_decode($location, true);
+        $decodedLocation = $this->getGeolocation(self::API_KEY, $ip);
+        //$decodedLocation = json_decode($location, true);
         $iso2 = $decodedLocation['country_code2'];
+        \debug($decodedLocation);
 
         LocateUtility::mainstreamValue($iso2);
         $this->facts[$this->getBasename()] = $iso2;
 
         //\debug(GeneralUtility::getIndpEnv('_ARRAY'));
-        #\debug('rmsrmsrms - ' .  $iso2);
-        #die;
+        \debug('rmsrmsrms - ' .  $iso2);
+        die;
 
         return $this;
     }
@@ -70,22 +88,33 @@ class RmsFactProvider extends AbstractFactProvider
     }
 
 
-    private function getGeolocation(string $apiKey, string $ip, string $lang = "en", string $fields = "*", string $excludes = "")
+    private function getGeolocation(string $apiKey, string $ip, string $lang = "en", string $fields = "*", string $excludes = ""): array
     {
-        $url = "https://api.ipgeolocation.io/ipgeo?apiKey=" . $apiKey . "&ip=" . $ip . "&lang=" . $lang . "&fields=" . $fields . "&excludes=" . $excludes;
-        $cURL = curl_init();
+        $result = $this->ipCacheRepository->getCachedEntry($ip);
 
-        curl_setopt($cURL, CURLOPT_URL, $url);
-        curl_setopt($cURL, CURLOPT_HTTPGET, true);
-        curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($cURL, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Accept: application/json',
-            'User-Agent: ' . $_SERVER['HTTP_USER_AGENT']
-        ));
+        if (!\is_array($result)) {
 
-        $result = curl_exec($cURL);
-        \debug($result);
+            $url = "https://api.ipgeolocation.io/ipgeo?apiKey=" . $apiKey . "&ip=" . $ip . "&lang=" . $lang . "&fields=" . $fields . "&excludes=" . $excludes;
+            $cURL = curl_init();
+
+            curl_setopt($cURL, CURLOPT_URL, $url);
+            curl_setopt($cURL, CURLOPT_HTTPGET, true);
+            curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($cURL, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Accept: application/json',
+                'User-Agent: ' . $_SERVER['HTTP_USER_AGENT']
+            ));
+
+            $result_curl = curl_exec($cURL);
+            $result = \json_decode((string) $result_curl, true);
+
+            //\debug($coords);
+            if (\is_array($result)) {
+                $this->ipCacheRepository->addCachedEntry($ip, $result, $this->storage_pid);
+            }
+        }
+
         return $result;
     }
 }
