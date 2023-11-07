@@ -50,8 +50,8 @@ class RmsFactProvider extends AbstractFactProvider
         $this->facts[$this->getBasename()] = $iso2;
 
         //\debug(GeneralUtility::getIndpEnv('_ARRAY'));
-        \debug('rmsrmsrms - ' .  $iso2);
-        die;
+        #\debug('rmsrmsrms - ' .  $iso2);
+        #die;
 
         return $this;
     }
@@ -84,6 +84,8 @@ class RmsFactProvider extends AbstractFactProvider
             'User-Agent: ' . $_SERVER['HTTP_USER_AGENT']
         ));
 
-        return curl_exec($cURL);
+        $result = curl_exec($cURL);
+        \debug($result);
+        return $result;
     }
 }
