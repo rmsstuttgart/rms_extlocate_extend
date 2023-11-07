@@ -17,11 +17,11 @@ class RmsFactProvider extends AbstractFactProvider
     const API_KEY = '38433d1b928341c285d3251b5bcb46a6';
     const PROVIDER_NAME = 'rmsfactprovider';
     private int $storage_pid = 0;
+    private IpCacheRepository $ipCacheRepository;
 
-    public function __construct(
-        protected readonly IpCacheRepository $ipCacheRepository
-    ) {
-    }
+   public function injectIpCacheRepository(IpCacheRepository $ipCacheRepository): void {
+        $this->ipCacheRepository = $ipCacheRepository;
+   }
 
     /**
      * @inheritDoc
