@@ -1,0 +1,42 @@
+{
+    "name": "rms/rms-extlocate-extend",
+    "type": "typo3-cms-extension",
+    "description": "Extend the locate extension",
+    "keywords": [
+        "TYPO3",
+        "locate"
+    ],
+    "homepage": "https://github.com/rmsstuttgart/rms_extlocate_extend",
+    "authors": [
+        {
+            "name": "mk@rms",
+            "role": "Developer"
+        }
+    ],
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "^11 || ^12",
+        "leuchtfeuer/locate": "^11 || ^12",
+        "php": ">=8.1"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "rms_extlocate_extend"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Rms\\RmsExtlocateExtend\\": "Classes"
+        }
+    },
+    "replace": {
+        "typo3-ter/rms-extlocate-extend": "self.version"
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/cms-composer-installers": true,
+            "typo3/class-alias-loader": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
