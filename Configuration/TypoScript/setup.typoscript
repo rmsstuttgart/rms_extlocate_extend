@@ -25,7 +25,9 @@ config.tx_locate {
     # russia
     #simulateIp = 46.17.46.213
     # syria
-    simulateIp = 130.180.128.10
+    #simulateIp = 130.180.128.10
+    # north korea
+    #simulateIp = 147.46.20.10
 
     # See example file for configuration
     verdicts {
@@ -42,17 +44,26 @@ config.tx_locate {
 
     # See example file for configuration
     judges {
+
         10 = Leuchtfeuer\Locate\Judge\Condition
         10 {
-            verdict = redirectDefault
-            #fact = countryByIP
             fact = rmsFactProvider
             prosecution = sy
+            verdict = redirectDefault
         }
 
-        # All other users should be redirected to the English language version of the current page.
-        #999999 = Leuchtfeuer\Locate\Judge\Fixed
-        #999999.fact = rmsFactProvider
-        #999999.verdict = redirectDefault
+        11 = Leuchtfeuer\Locate\Judge\Condition
+        11 {
+            fact = rmsFactProvider
+            prosecution = ru
+            verdict = redirectDefault
+        }
+
+        11 = Leuchtfeuer\Locate\Judge\Condition
+        11 {
+            fact = rmsFactProvider
+            prosecution = kr
+            verdict = redirectDefault
+        }
     }
 }

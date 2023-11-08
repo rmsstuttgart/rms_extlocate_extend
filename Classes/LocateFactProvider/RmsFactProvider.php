@@ -38,10 +38,9 @@ class RmsFactProvider extends AbstractFactProvider
         );
         $this->storage_pid = (int)$typoscript['plugin.']['rms_extlocate_extend.']['storagePid'];
 
-        //foreach (GeneralUtility::getIndpEnv('_ARRAY') as $key => $value) {
-        //\debug($key);
-        //$this->facts[$this->getFactPropertyName($key)] = $value;
-        //}
+        foreach (GeneralUtility::getIndpEnv('_ARRAY') as $key => $value) {
+            $this->facts[$this->getFactPropertyName($key)] = $value;
+        }
 
         $simulateIp = $this->configuration['settings']['simulateIp'] ?: null;
         if ($simulateIp) {
@@ -73,7 +72,9 @@ class RmsFactProvider extends AbstractFactProvider
         //\debug($prosecution);
         $prosecution = (string)$prosecution;
         LocateUtility::mainstreamValue($prosecution);
-        //\debug($prosecution); die('isGuilty');
+        //\debug($this->facts[$this->getBasename()] === $prosecution);
+        //\debug($prosecution);
+        //die('isGuilty');
         return $this->facts[$this->getBasename()] === $prosecution;
     }
 
