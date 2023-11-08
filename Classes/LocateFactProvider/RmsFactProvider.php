@@ -38,8 +38,8 @@ class RmsFactProvider extends AbstractFactProvider
         );
         $this->storage_pid = (int)$typoscript['plugin.']['rms_extlocate_extend.']['storagePid'];
 
-        foreach (GeneralUtility::getIndpEnv('_ARRAY') as $key => $value) {
-            $this->facts[$this->getFactPropertyName($key)] = $value;
+        foreach ((array)GeneralUtility::getIndpEnv('_ARRAY') as $key => $value) {
+            $this->facts[$this->getFactPropertyName((string)$key)] = $value;
         }
 
         $simulateIp = $this->configuration['settings']['simulateIp'] ?: null;

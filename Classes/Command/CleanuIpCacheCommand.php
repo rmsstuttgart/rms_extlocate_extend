@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rms\RmsExtlocateExtend\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,14 +28,13 @@ class CleanuIpCacheCommand extends AbstractCommand
     }
 
     public function __construct(
-        PersistenceManager $persistenceManager,
         ConfigurationManager $configurationManager,
         ConnectionPool $connectionPool
     ) {
         $this->configurationManager = $configurationManager;
         $this->connectionPool = $connectionPool;
 
-        /** @var ConfigurationConfigurationManager $configurationManager */
+        /** @var ConfigurationManager $configurationManager */
         $configurationManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class);
         $typoscript = $configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
@@ -61,7 +62,6 @@ class CleanuIpCacheCommand extends AbstractCommand
             ->executeStatement();
 
         $this->io->writeln("\nClean up ip cache cache - " . $affectedRows . " rows deleted \n");
-
 
         $time_elapsed_secs = \round(microtime(true) - $time_start, 2);
         $this->io->writeln('Done, total time: ' . $time_elapsed_secs . " seconds \n");
