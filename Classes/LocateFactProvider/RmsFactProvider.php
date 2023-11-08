@@ -52,7 +52,12 @@ class RmsFactProvider extends AbstractFactProvider
 
         //$location = $this->getGeolocation(self::API_KEY, $ip);
         $decodedLocation = $this->getGeolocation(self::API_KEY, $ip);
-        $iso2 = $decodedLocation['country_code2'];
+
+        if (!isset($decodedLocation['country_code2'])) {
+            $iso2 = 'de';
+        } else {
+            $iso2 = $decodedLocation['country_code2'];
+        }
 
         LocateUtility::mainstreamValue($iso2);
         $this->facts[$this->getBasename()] = $iso2;

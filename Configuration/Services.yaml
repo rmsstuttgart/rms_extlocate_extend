@@ -1,8 +1,14 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Rms\RmsExtlocateExtend\:
-    resource: "../Classes/*"
+    Rms\RmsExtlocateExtend\:
+        resource: "../Classes/*"
+
+    Rms\RmsExtlocateExtend\Command\CleanuIpCacheCommand:
+        tags:
+            - name: "console.command"
+              command: "rms_extlocate:cleanup ip cache"
+              description: "Cleanup IP geolocation cache"

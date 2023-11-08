@@ -21,7 +21,7 @@ config.tx_locate {
 
     # Simulate your IP address for countryByIP fact provider (for test purposes only)
     # germany
-    simulateIp = 91.107.229.241
+    #simulateIp = 91.107.229.241
     # russia
     #simulateIp = 46.17.46.213
     # syria
@@ -59,8 +59,8 @@ config.tx_locate {
             verdict = redirectDefault
         }
 
-        11 = Leuchtfeuer\Locate\Judge\Condition
-        11 {
+        12 = Leuchtfeuer\Locate\Judge\Condition
+        12 {
             fact = rmsFactProvider
             prosecution = kr
             verdict = redirectDefault
