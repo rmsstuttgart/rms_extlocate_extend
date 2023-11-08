@@ -6,7 +6,6 @@ namespace Rms\RmsExtlocateExtend\LocateFactProvider;
 
 use Leuchtfeuer\Locate\FactProvider\AbstractFactProvider;
 use Leuchtfeuer\Locate\Utility\LocateUtility;
-use Rms\RmsExtlocateExtend\Domain\Repository\IpCacheRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -17,11 +16,6 @@ class RmsFactProvider extends AbstractFactProvider
     const API_KEY = '38433d1b928341c285d3251b5bcb46a6';
     const PROVIDER_NAME = 'rmsfactprovider';
     private int $storage_pid = 0;
-    private IpCacheRepository $ipCacheRepository;
-
-   public function injectIpCacheRepository(IpCacheRepository $ipCacheRepository): void {
-        $this->ipCacheRepository = $ipCacheRepository;
-   }
 
     /**
      * @inheritDoc
@@ -56,20 +50,16 @@ class RmsFactProvider extends AbstractFactProvider
             $ip = (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
         }
 
-        //\debug($ip);
-
-        $location = $this->getGeolocation(self::API_KEY, $ip);
+        //$location = $this->getGeolocation(self::API_KEY, $ip);
         $decodedLocation = $this->getGeolocation(self::API_KEY, $ip);
-        //$decodedLocation = json_decode($location, true);
         $iso2 = $decodedLocation['country_code2'];
-        \debug($decodedLocation);
 
         LocateUtility::mainstreamValue($iso2);
         $this->facts[$this->getBasename()] = $iso2;
 
         //\debug(GeneralUtility::getIndpEnv('_ARRAY'));
-        \debug('rmsrmsrms - ' .  $iso2);
-        die;
+        //\debug('rmsrmsrms - ' .  $iso2);
+        //die;
 
         return $this;
     }
@@ -83,14 +73,13 @@ class RmsFactProvider extends AbstractFactProvider
         LocateUtility::mainstreamValue($prosecution);
         //\debug($prosecution);
         //die('xxx');
-
         return $this->facts[$this->getBasename()] === $prosecution;
     }
 
-
     private function getGeolocation(string $apiKey, string $ip, string $lang = "en", string $fields = "*", string $excludes = ""): array
     {
-        $result = $this->ipCacheRepository->getCachedEntry($ip);
+        $dbutil = new DbUtility();
+        $result = $dbutil->getCachedEntry($ip);
 
         if (!\is_array($result)) {
 
@@ -111,7 +100,7 @@ class RmsFactProvider extends AbstractFactProvider
 
             //\debug($coords);
             if (\is_array($result)) {
-                $this->ipCacheRepository->addCachedEntry($ip, $result, $this->storage_pid);
+                $dbutil->addCachedEntry($ip, $result, $this->storage_pid);
             }
         }
 

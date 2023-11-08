@@ -19,7 +19,7 @@ config.tx_locate {
     # germany
     simulateIp = 91.107.229.241
     # russia
-    simulateIp = 46.17.46.213
+    #simulateIp = 46.17.46.213
     # syria
     #simulateIp = 130.180.128.10
 
