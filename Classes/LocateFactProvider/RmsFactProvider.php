@@ -85,9 +85,10 @@ class RmsFactProvider extends AbstractFactProvider
 
     private function getGeolocation(string $apiKey, string $ip, string $lang = "en", string $fields = "*", string $excludes = ""): array
     {
+        $ip = \trim($ip);
         $dbutil = new DbUtility();
         $result = $dbutil->getCachedEntry($ip);
-        //\debug('xxxxxx'); die;
+        //\debug($result); die;
 
         if (!\is_array($result)) {
             $url = "https://api.ipgeolocation.io/ipgeo?apiKey=" . $apiKey . "&ip=" . $ip . "&lang=" . $lang . "&fields=" . $fields . "&excludes=" . $excludes;
@@ -105,6 +106,7 @@ class RmsFactProvider extends AbstractFactProvider
             $result_curl = curl_exec($cURL);
             $result = \json_decode((string) $result_curl, true);
 
+            //\debug($result); die;
             if (\is_array($result) && isset($result['ip']) && isset($result['country_code2'])) {
                 $dbutil->addCachedEntry($ip, $result, $this->storage_pid);
             }
