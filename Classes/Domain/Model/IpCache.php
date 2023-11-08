@@ -59,5 +59,4 @@ class IpCache extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->jsonGeodata = $jsonGeodata;
     }
-
 }

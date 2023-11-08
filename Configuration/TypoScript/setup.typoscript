@@ -1,3 +1,7 @@
+
+# storage pid for the ip cache entries
+plugin.rms_extlocate_extend.storagePid = 96
+
 #config.tx_locate = 0
 config.tx_locate {
     # Set this param if you do not want to execute the redirect
@@ -21,12 +25,12 @@ config.tx_locate {
     # russia
     #simulateIp = 46.17.46.213
     # syria
-    #simulateIp = 130.180.128.10
+    simulateIp = 130.180.128.10
 
     # See example file for configuration
     verdicts {
-        redirectRussia = Leuchtfeuer\Locate\Verdict\Redirect
-        redirectRussia.url = /404-error
+        redirectDefault = Leuchtfeuer\Locate\Verdict\Redirect
+        redirectDefault.url = /error-country-not-allowed
     }
 
     facts {
@@ -38,12 +42,17 @@ config.tx_locate {
 
     # See example file for configuration
     judges {
-    100 = Leuchtfeuer\Locate\Judge\Condition
-        100 {
-            verdict = redirectRussia
+        10 = Leuchtfeuer\Locate\Judge\Condition
+        10 {
+            verdict = redirectDefault
             #fact = countryByIP
             fact = rmsFactProvider
-            prosecution = ru
+            prosecution = sy
         }
+
+        # All other users should be redirected to the English language version of the current page.
+        #999999 = Leuchtfeuer\Locate\Judge\Fixed
+        #999999.fact = rmsFactProvider
+        #999999.verdict = redirectDefault
     }
 }

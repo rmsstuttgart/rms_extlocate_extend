@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rms\RmsExtlocateExtend\LocateFactProvider;
 
 use DateTimeImmutable;

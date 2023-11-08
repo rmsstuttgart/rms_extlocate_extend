@@ -47,7 +47,8 @@ class RmsFactProvider extends AbstractFactProvider
         if ($simulateIp) {
             $ip = $simulateIp;
         } else {
-            $ip = (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
+            //$ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
+            $ip = \strval($_SERVER['REMOTE_ADDR']);
         }
 
         //$location = $this->getGeolocation(self::API_KEY, $ip);
@@ -57,22 +58,22 @@ class RmsFactProvider extends AbstractFactProvider
         LocateUtility::mainstreamValue($iso2);
         $this->facts[$this->getBasename()] = $iso2;
 
-        //\debug(GeneralUtility::getIndpEnv('_ARRAY'));
-        //\debug('rmsrmsrms - ' .  $iso2);
-        //die;
+        #\debug($this->getBasename());
+        //\debug('rmsrmsrms - ' .  $iso2); die;
 
         return $this;
     }
 
     /**
-     * @inheritDoc
+     * @param string $prosecution
+     * @return bool
      */
     public function isGuilty($prosecution): bool
     {
+        //\debug($prosecution);
         $prosecution = (string)$prosecution;
         LocateUtility::mainstreamValue($prosecution);
-        //\debug($prosecution);
-        //die('xxx');
+        //\debug($prosecution); die('isGuilty');
         return $this->facts[$this->getBasename()] === $prosecution;
     }
 
@@ -80,9 +81,9 @@ class RmsFactProvider extends AbstractFactProvider
     {
         $dbutil = new DbUtility();
         $result = $dbutil->getCachedEntry($ip);
+        //\debug('xxxxxx'); die;
 
         if (!\is_array($result)) {
-
             $url = "https://api.ipgeolocation.io/ipgeo?apiKey=" . $apiKey . "&ip=" . $ip . "&lang=" . $lang . "&fields=" . $fields . "&excludes=" . $excludes;
             $cURL = curl_init();
 
@@ -92,14 +93,13 @@ class RmsFactProvider extends AbstractFactProvider
             curl_setopt($cURL, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
                 'Accept: application/json',
-                'User-Agent: ' . $_SERVER['HTTP_USER_AGENT']
+                'User-Agent: ' . $_SERVER['HTTP_USER_AGENT'],
             ));
 
             $result_curl = curl_exec($cURL);
             $result = \json_decode((string) $result_curl, true);
 
-            //\debug($coords);
-            if (\is_array($result)) {
+            if (\is_array($result) && isset($result['ip']) && isset($result['country_code2'])) {
                 $dbutil->addCachedEntry($ip, $result, $this->storage_pid);
             }
         }
