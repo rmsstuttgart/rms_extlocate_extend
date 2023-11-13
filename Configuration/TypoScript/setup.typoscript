@@ -1,6 +1,6 @@
 
 # storage pid for the ip cache entries
-plugin.rms_extlocate_extend.storagePid = 96
+plugin.rms_extlocate_extend.storagePid = 95
 
 #config.tx_locate = 0
 config.tx_locate {
@@ -21,11 +21,11 @@ config.tx_locate {
 
     # Simulate your IP address for countryByIP fact provider (for test purposes only)
     # germany
-    simulateIp = 91.107.229.241
+    #simulateIp = 91.107.229.241
     # russia
     #simulateIp = 46.17.46.213
     # syria
-    simulateIp = 130.180.128.10
+    #simulateIp = 130.180.128.10
     # north korea
     #simulateIp = 147.46.20.10
 
@@ -65,5 +65,12 @@ config.tx_locate {
             prosecution = kr
             verdict = redirectDefault
         }
+
+        #13 = Leuchtfeuer\Locate\Judge\Condition
+        #13 {
+        #    fact = rmsFactProvider
+        #    prosecution = de
+        #    verdict = redirectDefault
+        #}
     }
 }
