@@ -66,11 +66,11 @@ config.tx_locate {
             verdict = redirectDefault
         }
 
-        13 = Leuchtfeuer\Locate\Judge\Condition
-        13 {
-            fact = rmsFactProvider
-            prosecution = no
-            verdict = redirectDefault
-        }
+        #13 = Leuchtfeuer\Locate\Judge\Condition
+        #13 {
+        #    fact = rmsFactProvider
+        #    prosecution = no
+        #    verdict = redirectDefault
+        #}
     }
 }
