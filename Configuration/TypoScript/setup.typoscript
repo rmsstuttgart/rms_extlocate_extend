@@ -43,8 +43,10 @@ config.tx_locate {
     }
 
     # See example file for configuration
+    # https://www.oenb.at/Statistik/Klassifikationen/ISO-Codes/ISO-Code-Verzeichnis-fuer-Laender--und-Waehrungscodes.html
     judges {
 
+        # syria
         10 = Leuchtfeuer\Locate\Judge\Condition
         10 {
             fact = rmsFactProvider
@@ -52,6 +54,7 @@ config.tx_locate {
             verdict = redirectDefault
         }
 
+        # russia
         11 = Leuchtfeuer\Locate\Judge\Condition
         11 {
             fact = rmsFactProvider
@@ -59,6 +62,7 @@ config.tx_locate {
             verdict = redirectDefault
         }
 
+        # north korea
         12 = Leuchtfeuer\Locate\Judge\Condition
         12 {
             fact = rmsFactProvider
@@ -66,10 +70,33 @@ config.tx_locate {
             verdict = redirectDefault
         }
 
-        #13 = Leuchtfeuer\Locate\Judge\Condition
-        #13 {
+        # Belarus (Weissrussland)
+        13 = Leuchtfeuer\Locate\Judge\Condition
+        13 {
+            fact = rmsFactProvider
+            prosecution = by
+            verdict = redirectDefault
+        }
+
+        # iran
+        14 = Leuchtfeuer\Locate\Judge\Condition
+        14 {
+            fact = rmsFactProvider
+            prosecution = ir
+            verdict = redirectDefault
+        }
+
+        #15 = Leuchtfeuer\Locate\Judge\Condition
+        #15 {
         #    fact = rmsFactProvider
-        #    prosecution = no
+        #    prosecution = il
+        #    verdict = redirectDefault
+        #}
+
+        #16 = Leuchtfeuer\Locate\Judge\Condition
+        #16 {
+        #    fact = rmsFactProvider
+        #    prosecution = ua
         #    verdict = redirectDefault
         #}
     }
