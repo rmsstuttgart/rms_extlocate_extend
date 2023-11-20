@@ -6,16 +6,17 @@ namespace Rms\RmsExtlocateExtend\LocateFactProvider;
 
 use Leuchtfeuer\Locate\FactProvider\AbstractFactProvider;
 use Leuchtfeuer\Locate\Utility\LocateUtility;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class RmsFactProvider extends AbstractFactProvider
 {
-    // https://app.ipgeolocation.io/
-    const API_KEY = '38433d1b928341c285d3251b5bcb46a6';
     const PROVIDER_NAME = 'rmsfactprovider';
     private int $storage_pid = 0;
+
+    protected array $extConfig;
 
     /**
      * @inheritDoc
@@ -30,6 +31,10 @@ class RmsFactProvider extends AbstractFactProvider
      */
     public function process(): self
     {
+        /** @var ExtensionConfiguration $extconfObj */
+        $extconfObj = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+        $this->extConfig = $extconfObj->get('rms_extlocate_extend');
+
         /** @var ConfigurationManager $configurationManager */
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
         $typoscript = $configurationManager->getConfiguration(
@@ -55,7 +60,7 @@ class RmsFactProvider extends AbstractFactProvider
         }
 
         //$location = $this->getGeolocation(self::API_KEY, $ip);
-        $decodedLocation = $this->getGeolocation(self::API_KEY, $ip);
+        $decodedLocation = $this->getGeolocation($this->extConfig['ipgeolocation_api_key'], $ip);
 
         if (!isset($decodedLocation['country_code2'])) {
             $iso2 = 'de';

@@ -1,0 +1,2 @@
+# cat=basic/enable; type=string; label= S3 Endpoint
+ipgeolocation_api_key = 00000

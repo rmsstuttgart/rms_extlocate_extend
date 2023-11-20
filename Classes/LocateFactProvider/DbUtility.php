@@ -80,7 +80,8 @@ class DbUtility
                 'pid' => $pid,
                 'hash_value' => $hash,
                 'ip' => $ip,
-                //'country_name' => $address,
+                'country_name' => $json_data['country_name'],
+                'country_code' => $json_data['country_code2'],
                 'json_geodata' => $json_string,
             ])
             ->executeStatement();
