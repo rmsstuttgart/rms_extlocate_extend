@@ -54,8 +54,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_rmssoftgarden_domain_model_geocode_cache',
-                'foreign_table_where' => 'AND {#tx_rmssoftgarden_domain_model_geocode_cache}.{#pid}=###CURRENT_PID### AND {#tx_rmssoftgarden_domain_model_geocode_cache}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'rms_extlocate_extend_domain_model_ip_cache',
+                'foreign_table_where' => 'AND {#rms_extlocate_extend_domain_model_ip_cache}.{#pid}=###CURRENT_PID### AND {#rms_extlocate_extend_domain_model_ip_cache}.{#sys_language_uid} IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
