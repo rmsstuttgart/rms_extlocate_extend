@@ -20,11 +20,11 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'search_string',
+        'searchFields' => 'ip,country_name,country_code',
         'iconfile' => 'EXT:rms_extlocate_extend/Resources/Public/Icons/rms_extlocate_extend_domain_model_ip_cache.gif',
     ],
     'types' => [
-        '1' => ['showitem' => 'ip,hash_value, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
+        '1' => ['showitem' => 'ip,country_name,country_code,hash_value, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -123,6 +123,30 @@ return [
         'ip' => [
             'exclude' => false,
             'label' => 'IP-Address',
+            'config' => [
+                'readOnly' => 1,
+                'type' => 'input',
+                'size' => 200,
+                'eval' => 'trim,required',
+                'default' => '',
+            ],
+        ],
+
+        'country_name' => [
+            'exclude' => false,
+            'label' => 'Country name',
+            'config' => [
+                'readOnly' => 1,
+                'type' => 'input',
+                'size' => 200,
+                'eval' => 'trim,required',
+                'default' => '',
+            ],
+        ],
+
+        'country_code' => [
+            'exclude' => false,
+            'label' => 'Country code',
             'config' => [
                 'readOnly' => 1,
                 'type' => 'input',
