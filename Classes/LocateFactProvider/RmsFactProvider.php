@@ -50,9 +50,8 @@ class RmsFactProvider extends AbstractFactProvider
         $simulateIp = $this->configuration['settings']['simulateIp'] ?: null;
         if ($simulateIp) {
             $ip = $simulateIp;
-        }
-        // if this script runs behind a reverse proxy, we do not have the real ip in REMOTE_ADDR
-        else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            // if this script runs behind a reverse proxy, we do not have the real ip in REMOTE_ADDR
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         } else {
             //$ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
