@@ -64,7 +64,7 @@
     <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
-            <property name="newlinesCountBetweenOpenTagAndDeclare" type="int" value="1"/>
+            <!--<property name="newlinesCountBetweenOpenTagAndDeclare" type="int" value="1"/>-->
             <property name="spacesCountAroundEqualsSign" type="int" value="0"/>
         </properties>
         <!--<exclude-pattern>x/y</exclude-pattern>-->
