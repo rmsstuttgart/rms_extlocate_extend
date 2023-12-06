@@ -21,7 +21,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'ip,country_name,country_code',
-        'iconfile' => 'EXT:rms_extlocate_extend/Resources/Public/Icons/rms_extlocate_extend_domain_model_ip_cache.gif',
+        'iconfile' => 'EXT:rms_extlocate_extend/Ressources/Public/Icons/rms_extlocate_extend_domain_model_ip_cache.gif',
     ],
     'types' => [
         '1' => ['showitem' => 'ip,country_name,country_code,hash_value, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
