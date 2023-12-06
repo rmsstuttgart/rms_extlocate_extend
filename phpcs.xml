@@ -34,7 +34,6 @@
         <severity>0</severity>
     </rule>
 
-    <rule ref="PSR12" />
 
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
         <exclude-pattern>Tests/Functional/Domain/Form/Finishers/functions.php</exclude-pattern>
@@ -65,14 +64,15 @@
     <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
-            <!--<property name="newlinesCountBetweenOpenTagAndDeclare" type="int" value="1"/>-->
+            <property name="newlinesCountBetweenOpenTagAndDeclare" type="int" value="1"/>
             <property name="spacesCountAroundEqualsSign" type="int" value="0"/>
         </properties>
-        <exclude-pattern>campus/templates</exclude-pattern>
+        <!--<exclude-pattern>x/y</exclude-pattern>-->
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
     <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
+
 
 
 </ruleset>

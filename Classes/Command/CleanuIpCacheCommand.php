@@ -16,8 +16,11 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 class CleanuIpCacheCommand extends AbstractCommand
 {
     protected ConnectionPool $connectionPool;
+
     protected ConfigurationManager $configurationManager;
+
     protected PersistenceManager $persistenceManager;
+
     private SymfonyStyle $io;
 
     protected function configure(): void
@@ -35,7 +38,7 @@ class CleanuIpCacheCommand extends AbstractCommand
         $this->connectionPool = $connectionPool;
 
         /** @var ConfigurationManager $configurationManager */
-        $configurationManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
         $typoscript = $configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
             'sitepackage'

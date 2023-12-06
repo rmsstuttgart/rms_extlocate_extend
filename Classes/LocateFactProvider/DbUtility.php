@@ -20,6 +20,7 @@ class DbUtility
     {
         $ip = \strtolower($ip);
         $ip = \trim($ip);
+
         $hash = md5($ip);
 
         /** @var ConnectionPool $pool */
@@ -62,6 +63,7 @@ class DbUtility
     {
         $ip = \strtolower($ip);
         $ip = \trim($ip);
+
         $hash = md5($ip);
         $json_string = (string)\json_encode($json_data);
 

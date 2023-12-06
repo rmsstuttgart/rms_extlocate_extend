@@ -13,7 +13,11 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class RmsFactProvider extends AbstractFactProvider
 {
-    const PROVIDER_NAME = 'rmsfactprovider';
+    /**
+     * @var string
+     */
+    final const PROVIDER_NAME = 'rmsfactprovider';
+
     private int $storage_pid = 0;
 
     protected array $extConfig;
@@ -55,17 +59,13 @@ class RmsFactProvider extends AbstractFactProvider
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         } else {
             //$ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
-            $ip = \strval($_SERVER['REMOTE_ADDR']);
+            $ip = (string) $_SERVER['REMOTE_ADDR'];
         }
 
         //$location = $this->getGeolocation(self::API_KEY, $ip);
         $decodedLocation = $this->getGeolocation($this->extConfig['ipgeolocation_api_key'], $ip);
 
-        if (!isset($decodedLocation['country_code2'])) {
-            $iso2 = 'de';
-        } else {
-            $iso2 = $decodedLocation['country_code2'];
-        }
+        $iso2 = isset($decodedLocation['country_code2']) ? $decodedLocation['country_code2'] : 'de';
 
         LocateUtility::mainstreamValue($iso2);
         $this->facts[$this->getBasename()] = $iso2;

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Rms\RmsExtlocateExtend\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * This file is part of the "rms_extlocate" Extension for TYPO3 CMS.
  *
@@ -13,11 +15,14 @@ namespace Rms\RmsExtlocateExtend\Domain\Model;
  * (c) 2023 mk <mkettel@gmail.com>, rms. relationship marketing solutions GmbH
  */
 
-class IpCache extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class IpCache extends AbstractEntity
 {
     protected string $hashValue = '';
+
     protected string $ip = '';
+
     protected string $countryName = '';
+
     protected string $jsonGeodata = '';
 
     public function getHashValue(): string

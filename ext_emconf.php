@@ -10,7 +10,6 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'mk',
     'author_email' => 'mkettel@gmail.com',
     'state' => 'stable',
-    'clearCacheOnLoad' => 0,
     'version' => '1.0.0',
     'constraints' => [
         'depends' => [
