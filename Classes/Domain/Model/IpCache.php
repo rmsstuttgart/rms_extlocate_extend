@@ -17,7 +17,7 @@ class IpCache extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     protected string $hashValue = '';
     protected string $ip = '';
-    protected string $countryName= '';
+    protected string $countryName = '';
     protected string $jsonGeodata = '';
 
     public function getHashValue(): string

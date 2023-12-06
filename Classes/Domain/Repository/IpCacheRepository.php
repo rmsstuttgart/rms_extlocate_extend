@@ -12,7 +12,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class IpCacheRepository extends Repository
 {
-
     public function initializeObject(): void
     {
         //$querySettings = new Typo3QuerySettings();
