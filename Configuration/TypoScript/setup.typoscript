@@ -28,6 +28,7 @@ config.tx_locate {
     #simulateIp = 130.180.128.10
     # north korea
     #simulateIp = 147.46.20.10
+    #simulateIp = 0.0.0.1
 
     # See example file for configuration
     verdicts {

@@ -117,6 +117,8 @@ class RmsFactProvider extends AbstractFactProvider
             //\debug($result); die;
             if (\is_array($result) && isset($result['ip']) && isset($result['country_code2'])) {
                 $dbutil->addCachedEntry($ip, $result, $this->storage_pid);
+            } else {
+                $result = [];
             }
         }
 
