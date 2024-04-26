@@ -2,8 +2,7 @@
     "name": "rms/rms-extlocate-extend",
     "type": "typo3-cms-extension",
     "description": "Extend the locate extension",
-    "minimum-stability": "dev",
-    "prefer-stable": false,
+    "version": "12.0.0",
     "keywords": [
         "TYPO3",
         "locate"
