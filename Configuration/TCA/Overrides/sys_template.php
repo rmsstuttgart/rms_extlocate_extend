@@ -8,10 +8,10 @@ defined('TYPO3') || die();
 
 call_user_func(
     static function () {
-        ExtensionManagementUtility::addStaticFile(
-            'rms_extlocate_extend',
-            'Configuration/TypoScript',
-            'rms_extlocate_extend'
-        );
+        //ExtensionManagementUtility::addStaticFile(
+        //    'rms_extlocate_extend',
+        //    'Configuration/TypoScript',
+        //    'rms_extlocate_extend'
+        //);
     }
 );
