@@ -10,5 +10,5 @@ services:
     Rms\RmsExtlocateExtend\Command\CleanuIpCacheCommand:
         tags:
             - name: "console.command"
-              command: "rms_extlocate:cleanup ip cache"
+              command: "rms_extlocate:cleanup_ip_cache"
               description: "Cleanup IP geolocation cache"
