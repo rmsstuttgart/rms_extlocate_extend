@@ -1,3 +1,7 @@
+#
+# usage <INCLUDE_TYPOSCRIPT: source="FILE:EXT:rms_extlocate_extend/Configuration/TypoScript/setup.typoscript">
+# and then overwrite whatever setttiungs you need
+
 
 # storage pid for the ip cache entries
 #plugin.rms_extlocate_extend.storagePid = 95
@@ -40,8 +44,8 @@ config.tx_locate {
 
     # See example file for configuration
     verdicts {
-        redirectDefault = Leuchtfeuer\Locate\Verdict\Redirect
-        redirectDefault.url = /error-country-not-allowed
+        redirectDefaultRms = Leuchtfeuer\Locate\Verdict\Redirect
+        redirectDefaultRms.url = /error-country-not-allowed
     }
 
     # See example file for configuration
@@ -53,7 +57,7 @@ config.tx_locate {
         10 {
             fact = rmsfactprovider
             prosecution = sy
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # russia
@@ -61,7 +65,7 @@ config.tx_locate {
         11 {
             fact = rmsfactprovider
             prosecution = ru
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # north korea
@@ -69,7 +73,7 @@ config.tx_locate {
         12 {
             fact = rmsfactprovider
             prosecution = kp
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # Belarus (Weissrussland)
@@ -77,7 +81,7 @@ config.tx_locate {
         13 {
             fact = rmsFactProvider
             prosecution = by
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # iran
@@ -85,7 +89,7 @@ config.tx_locate {
         14 {
             fact = rmsfactprovider
             prosecution = ir
-            verdict = redirectDefaultå
+            verdict = redirectDefaultRms
         }
 
         # test
@@ -93,7 +97,7 @@ config.tx_locate {
         #100 {
         #    fact = rmsfactprovider
         #    prosecution = de
-        #    verdict = redirectDefault
+        #    verdict = redirectDefaultRms
         #}
 
         # test
@@ -101,7 +105,7 @@ config.tx_locate {
         #200 {
         #    fact = rmsfactprovider
         #    prosecution = il
-        #    verdict = redirectDefault
+        #    verdict = redirectDefaultRms
         #}
 
         # test
@@ -109,7 +113,7 @@ config.tx_locate {
         #300 {
         #    fact = rmsfactprovider
         #    prosecution = es
-        #    verdict = redirectDefault
+        #    verdict = redirectDefaultRms
         #}
     }
 }
