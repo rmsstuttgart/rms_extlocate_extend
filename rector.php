@@ -30,7 +30,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     // Define your target version which you want to support
-    $rectorConfig->phpVersion(PhpVersion::PHP_81);
+    //$rectorConfig->phpVersion(PhpVersion::PHP_81);
 
     // If you only want to process one/some TYPO3 extension(s), you can specify its path(s) here.
     // If you use the option --config change __DIR__ to getcwd()
@@ -67,7 +67,7 @@ return static function (RectorConfig $rectorConfig): void {
             //__DIR__ . '/**/Configuration/**/*.php',
         ],
         NewlineAfterStatementRector::class,
-        UnSpreadOperatorRector::class,
+        //UnSpreadOperatorRector::class,
         NewlineBeforeNewAssignSetRector::class,
     ]);
 
@@ -97,10 +97,10 @@ return static function (RectorConfig $rectorConfig): void {
         \Ssch\TYPO3Rector\FileProcessor\TypoScript\Rector\v10\v0\ExtbasePersistenceTypoScriptRector::FILENAME => __DIR__ . '/packages/acme_demo/Configuration/Extbase/Persistence/Classes.php',
     ]); */
     // Add some general TYPO3 rules
-    $rectorConfig->rule(ConvertImplicitVariablesToExplicitGlobalsRector::class);
-    $rectorConfig->ruleWithConfiguration(ExtEmConfRector::class, [
-        ExtEmConfRector::ADDITIONAL_VALUES_TO_BE_REMOVED => [],
-    ]);
+    //$rectorConfig->rule(ConvertImplicitVariablesToExplicitGlobalsRector::class);
+    //$rectorConfig->ruleWithConfiguration(ExtEmConfRector::class, [
+    //    ExtEmConfRector::ADDITIONAL_VALUES_TO_BE_REMOVED => [],
+    //]);
 
     // Modernize your TypoScript include statements for files and move from <INCLUDE /> to @import use the FileIncludeToImportStatementVisitor (introduced with TYPO3 9.0)
     // $rectorConfig->rule(\Ssch\TYPO3Rector\FileProcessor\TypoScript\Rector\v9\v0\FileIncludeToImportStatementTypoScriptRector::class);

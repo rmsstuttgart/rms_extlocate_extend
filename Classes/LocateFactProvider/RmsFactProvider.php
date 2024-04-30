@@ -87,7 +87,9 @@ class RmsFactProvider extends AbstractFactProvider
         LocateUtility::mainstreamValue($prosecution);
         //\debug($this->facts[$this->getBasename()] === $prosecution);
         //\debug($prosecution);
-        //die('isGuilty');
+        //die('RmsFactProvider:isGuilty');
+        #$is_guilty = ($this->facts[$this->getBasename()] === $prosecution);
+
         return $this->facts[$this->getBasename()] === $prosecution;
     }
 

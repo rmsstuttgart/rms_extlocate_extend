@@ -1,6 +1,10 @@
+#
+# usage <INCLUDE_TYPOSCRIPT: source="FILE:EXT:rms_extlocate_extend/Configuration/TypoScript/setup.typoscript">
+# and then overwrite whatever setttiungs you need
+
 
 # storage pid for the ip cache entries
-plugin.rms_extlocate_extend.storagePid = 95
+#plugin.rms_extlocate_extend.storagePid = 95
 
 #config.tx_locate = 0
 config.tx_locate {
@@ -30,17 +34,18 @@ config.tx_locate {
     #simulateIp = 147.46.20.10
     #simulateIp = 0.0.0.1
 
-    # See example file for configuration
-    verdicts {
-        redirectDefault = Leuchtfeuer\Locate\Verdict\Redirect
-        redirectDefault.url = /error-country-not-allowed
-    }
-
     facts {
-        browserAcceptLanguage = Leuchtfeuer\Locate\FactProvider\BrowserAcceptedLanguage
+        #browserAcceptLanguage = Leuchtfeuer\Locate\FactProvider\BrowserAcceptedLanguage
         #countryByIP = Leuchtfeuer\Locate\FactProvider\IP2Country
         #rmsFactProvider = SafePsi\SafePsiTemplate\LocateFactProvider\RmsFactProvider
-        rmsFactProvider = Rms\RmsExtlocateExtend\LocateFactProvider\RmsFactProvider
+        #rmsFactProvider = Rms\RmsExtlocateExtend\LocateFactProvider\RmsFactProvider
+        rmsfactprovider = Rms\RmsExtlocateExtend\LocateFactProvider\RmsFactProvider
+    }
+
+    # See example file for configuration
+    verdicts {
+        redirectDefaultRms = Leuchtfeuer\Locate\Verdict\Redirect
+        redirectDefaultRms.url = /error-country-not-allowed
     }
 
     # See example file for configuration
@@ -50,57 +55,65 @@ config.tx_locate {
         # syria
         10 = Leuchtfeuer\Locate\Judge\Condition
         10 {
-            fact = rmsFactProvider
+            fact = rmsfactprovider
             prosecution = sy
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # russia
         11 = Leuchtfeuer\Locate\Judge\Condition
         11 {
-            fact = rmsFactProvider
+            fact = rmsfactprovider
             prosecution = ru
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # north korea
         12 = Leuchtfeuer\Locate\Judge\Condition
         12 {
-            fact = rmsFactProvider
+            fact = rmsfactprovider
             prosecution = kp
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # Belarus (Weissrussland)
         13 = Leuchtfeuer\Locate\Judge\Condition
         13 {
-            fact = rmsFactProvider
+            fact = rmsfactprovider
             prosecution = by
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # iran
         14 = Leuchtfeuer\Locate\Judge\Condition
         14 {
-            fact = rmsFactProvider
+            fact = rmsfactprovider
             prosecution = ir
-            verdict = redirectDefault
+            verdict = redirectDefaultRms
         }
 
         # test
         #100 = Leuchtfeuer\Locate\Judge\Condition
         #100 {
-        #    fact = rmsFactProvider
-        #    prosecution = il
-        #    verdict = redirectDefault
+        #    fact = rmsfactprovider
+        #    prosecution = de
+        #    verdict = redirectDefaultRms
         #}
 
         # test
         #200 = Leuchtfeuer\Locate\Judge\Condition
         #200 {
-        #    fact = rmsFactProvider
+        #    fact = rmsfactprovider
+        #    prosecution = il
+        #    verdict = redirectDefaultRms
+        #}
+
+        # test
+        #300 = Leuchtfeuer\Locate\Judge\Condition
+        #300 {
+        #    fact = rmsfactprovider
         #    prosecution = es
-        #    verdict = redirectDefault
+        #    verdict = redirectDefaultRms
         #}
     }
 }
