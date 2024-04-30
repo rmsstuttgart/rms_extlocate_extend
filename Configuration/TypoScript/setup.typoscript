@@ -79,7 +79,7 @@ config.tx_locate {
         # Belarus (Weissrussland)
         13 = Leuchtfeuer\Locate\Judge\Condition
         13 {
-            fact = rmsFactProvider
+            fact = rmsfactprovider
             prosecution = by
             verdict = redirectDefaultRms
         }
