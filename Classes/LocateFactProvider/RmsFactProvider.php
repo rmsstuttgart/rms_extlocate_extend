@@ -88,7 +88,8 @@ class RmsFactProvider extends AbstractFactProvider
         //\debug($this->facts[$this->getBasename()] === $prosecution);
         //\debug($prosecution);
         //die('RmsFactProvider:isGuilty');
-        $is_guilty = ($this->facts[$this->getBasename()] === $prosecution);
+        #$is_guilty = ($this->facts[$this->getBasename()] === $prosecution);
+
         return $this->facts[$this->getBasename()] === $prosecution;
     }
 
