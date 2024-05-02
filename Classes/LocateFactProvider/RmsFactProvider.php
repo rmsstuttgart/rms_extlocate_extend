@@ -101,6 +101,8 @@ class RmsFactProvider extends AbstractFactProvider
         //\debug($result); die;
 
         if (!\is_array($result)) {
+            $agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+
             $url = "https://api.ipgeolocation.io/ipgeo?apiKey=" . $apiKey . "&ip=" . $ip . "&lang=" . $lang . "&fields=" . $fields . "&excludes=" . $excludes;
             $cURL = curl_init();
 
@@ -110,7 +112,7 @@ class RmsFactProvider extends AbstractFactProvider
             curl_setopt($cURL, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
                 'Accept: application/json',
-                'User-Agent: ' . $_SERVER['HTTP_USER_AGENT'],
+                'User-Agent: ' . $agent,
             ));
 
             $result_curl = curl_exec($cURL);
