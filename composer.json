@@ -17,7 +17,7 @@
     "license": "GPL-2.0-or-later",
     "require": {
         "typo3/cms-core": "^11 || ^12",
-        "leuchtfeuer/locate": "^12",
+        "leuchtfeuer/locate": "*",
         "php": ">=8.1"
     },
     "require-dev": {
