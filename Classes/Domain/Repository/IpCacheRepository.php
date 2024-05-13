@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Rms\RmsExtlocateExtend\Domain\Repository;
 
 use DateTimeImmutable;
+use Rms\RmsExtlocateExtend\Domain\Model\IpCache;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -12,7 +13,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * The repository for IpCache
- * @extends \TYPO3\CMS\Extbase\Persistence\Repository<\Rms\RmsExtlocateExtend\Domain\Model\IpCache>
+ * @extends Repository<IpCache>
  */
 class IpCacheRepository extends Repository
 {
