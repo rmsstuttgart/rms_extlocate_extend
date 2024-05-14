@@ -20,6 +20,9 @@ class RmsFactProvider extends AbstractFactProvider
 
     private int $storage_pid = 0;
 
+    /**
+     * @var array<string, mixed>
+     */
     protected array $extConfig;
 
     /**
@@ -93,6 +96,14 @@ class RmsFactProvider extends AbstractFactProvider
         return $this->facts[$this->getBasename()] === $prosecution;
     }
 
+    /**
+     * @param string $apiKey
+     * @param string $ip
+     * @param string $lang
+     * @param string $fields
+     * @param string $excludes
+     * @return array<string, mixed>
+     */
     private function getGeolocation(string $apiKey, string $ip, string $lang = "en", string $fields = "*", string $excludes = ""): array
     {
         $ip = \trim($ip);

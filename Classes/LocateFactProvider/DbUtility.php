@@ -14,7 +14,7 @@ class DbUtility
      * get an array with lat long coordinates for a given address
      * from the local cache or false if not found
      *
-     * @return array|false
+     * @return array<string, mixed>|false
      */
     public function getCachedEntry(string $ip)
     {
@@ -55,7 +55,7 @@ class DbUtility
      * add a new entry to the local cache
      *
      * @param string $ip
-     * @param array $json_data
+     * @param array<string, mixed> $json_data
      * @param int $pid
      * @return void
      */
