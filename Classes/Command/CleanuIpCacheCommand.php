@@ -47,7 +47,12 @@ class CleanuIpCacheCommand extends AbstractCommand
         parent::__construct();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $time_start = microtime(true);
 
