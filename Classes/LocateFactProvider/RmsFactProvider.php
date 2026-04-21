@@ -107,7 +107,8 @@ class RmsFactProvider extends AbstractFactProvider
     private function getGeolocation(string $apiKey, string $ip, string $lang = "en", string $fields = "*", string $excludes = ""): array
     {
         $ip = \trim($ip);
-        $dbutil = new DbUtility();
+        $connectionPool = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class);
+        $dbutil = new DbUtility($connectionPool);
         $result = $dbutil->getCachedEntry($ip);
         //\debug($result); die;
 
