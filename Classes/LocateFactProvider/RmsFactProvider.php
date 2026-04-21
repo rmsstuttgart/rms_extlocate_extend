@@ -54,7 +54,7 @@ class RmsFactProvider extends AbstractFactProvider
             $this->facts[$this->getFactPropertyName((string)$key)] = $value;
         }
 
-        $simulateIp = $this->configuration['settings']['simulateIp'] ?: null;
+        $simulateIp = $this->configuration->getSimulateIp() ?: null;
         if ($simulateIp) {
             $ip = $simulateIp;
         } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {

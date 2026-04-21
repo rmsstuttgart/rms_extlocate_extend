@@ -16,9 +16,9 @@
     ],
     "license": "GPL-2.0-or-later",
     "require": {
-        "typo3/cms-core": "^11 || ^12",
+        "typo3/cms-core": "^13",
         "leuchtfeuer/locate": "*",
-        "php": ">=8.1"
+        "php": ">=8.2"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.9",
