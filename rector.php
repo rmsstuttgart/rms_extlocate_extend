@@ -13,8 +13,14 @@ use Ssch\TYPO3Rector\Set\Typo3SetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__ . '/packages',
-        //__DIR__ . '/packages/boschmedialib',
+        __DIR__ . '/Classes',
+        __DIR__ . '/ext_emconf.php',
+        __DIR__ . '/ext_localconf.php',
+        __DIR__ . '/ext_tables.php',
+        __DIR__ . '/ext_conf_template.txt',
+        __DIR__ . '/Configuration',
+        __DIR__ . '/Resources',
+
     ])
     // uncomment to reach your current PHP version
     // ->withPhpSets()

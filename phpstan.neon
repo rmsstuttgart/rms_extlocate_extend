@@ -19,7 +19,6 @@ parameters:
     excludePaths:
         - vendor/*
         - ext_emconf.php
-        - Tests
 
     # Ignore error, mainly due invalid PHP in TYPO3
     #ignoreErrors:
