@@ -32,7 +32,7 @@ return RectorConfig::configure()
     ])
     # To have a better analysis from PHPStan, we teach it here some more things
     ->withPHPStanConfigs([
-        Typo3Option::PHPSTAN_FOR_RECTOR_PATH
+        Typo3Option::PHPSTAN_FOR_RECTOR_PATH,
     ])
     ->withRules([
         AddVoidReturnTypeWhereNoReturnRector::class,
@@ -53,5 +53,5 @@ return RectorConfig::configure()
             //'ext_localconf.php', // This line can be removed since TYPO3 11.4, see https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/11.4/Important-94280-MoveContentsOfExtPhpIntoLocalScopes.html
             //'ext_tables.php', // This line can be removed since TYPO3 11.4, see https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/11.4/Important-94280-MoveContentsOfExtPhpIntoLocalScopes.html
             'ClassAliasMap.php',
-        ]
+        ],
     ]);
