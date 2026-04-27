@@ -4,8 +4,8 @@
 
 parameters:
     level: 7
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
+    #checkMissingIterableValueType: false
+    #checkGenericClassInNonGenericObjectType: false
     treatPhpDocTypesAsCertain: false
     bootstrapFiles:
         - phpstan_constants.php
