@@ -10,6 +10,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DbUtility
 {
+    public function __construct(private \TYPO3\CMS\Core\Database\ConnectionPool $connectionPool)
+    {
+    }
     /**
      * get an array with lat long coordinates for a given address
      * from the local cache or false if not found
@@ -24,14 +27,14 @@ class DbUtility
         $hash = md5($ip);
 
         /** @var ConnectionPool $pool */
-        $pool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $pool = $this->connectionPool;
         $queryBuilder = $pool->getQueryBuilderForTable('rms_extlocate_extend_domain_model_ip_cache');
 
         $result = $queryBuilder
             ->select('*')
             ->from('rms_extlocate_extend_domain_model_ip_cache')
             ->where(
-                $queryBuilder->expr()->eq('hash_value', $queryBuilder->createNamedParameter($hash, \PDO::PARAM_STR))
+                $queryBuilder->expr()->eq('hash_value', $queryBuilder->createNamedParameter($hash, \TYPO3\CMS\Core\Database\Connection::PARAM_STR))
             )
             ->executeQuery()
             ->fetchAssociative();
@@ -71,7 +74,7 @@ class DbUtility
         $tstamp = $date->getTimestamp();
 
         /** @var ConnectionPool $pool */
-        $pool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $pool = $this->connectionPool;
         $queryBuilder = $pool->getQueryBuilderForTable('rms_extlocate_extend_domain_model_ip_cache');
 
         $queryBuilder

@@ -7,8 +7,10 @@ namespace Rms\RmsExtlocateExtend\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
@@ -37,9 +39,24 @@ class CleanuIpCacheCommand extends AbstractCommand
         $this->configurationManager = $configurationManager;
         $this->connectionPool = $connectionPool;
 
-        /** @var ConfigurationManager $configurationManager */
-        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
-        $typoscript = $configurationManager->getConfiguration(
+        $request = new ServerRequest(
+            new Uri('https://localhost/'),
+            'GET',
+            'php://input',
+            [],
+            [
+                'HTTP_HOST' => 'localhost',
+                'SERVER_NAME' => 'localhost',
+                'HTTPS' => true,
+                'SCRIPT_FILENAME' => __FILE__,
+                'SCRIPT_NAME' => '/typo3/index.php',
+            ]
+        );
+        $request = $request->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
+        $this->configurationManager->setRequest($request);
+
+        $typoscript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
             'sitepackage'
         );
