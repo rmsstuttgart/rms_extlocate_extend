@@ -18,15 +18,13 @@
     "require": {
         "typo3/cms-core": "^13",
         "leuchtfeuer/locate": "*",
-        "php": ">=8.2"
+        "php": ">=8.4"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.9",
-        "phpstan/phpstan-strict-rules": "^1.4",
-        "phpstan/phpstan-deprecation-rules": "^1.1",
-        "squizlabs/php_codesniffer": "^3.7",
+        "phpstan/phpstan": "^2",
+        "ssch/typo3-rector": "^3",
         "cakephp/cakephp-codesniffer": "^5.0",
-        "ssch/typo3-rector": "^1.2"
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "extra": {
         "typo3/cms": {
